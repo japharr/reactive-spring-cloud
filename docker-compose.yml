@@ -1,0 +1,38 @@
+version: '3'
+services:
+  mongo:
+    image: 'mongo'
+  car-service:
+    build:
+      context: ./car-service
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+      - eureka
+    environment:
+      - MONGO_HOST=mongo
+      - EUREKA_HOST=eureka
+  eureka:
+    build:
+      context: ./discovery-service
+    ports:
+    - 8761:8761
+  api-gateway:
+    build:
+      context: ./api-gateway
+    ports:
+    - 8080:8080
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_HOST=eureka
+  driver-service:
+    build:
+      context: ./driver-service
+    ports:
+    - 8082:8082
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_HOST=eureka

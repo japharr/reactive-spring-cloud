@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: car-service
+  data:
+    mongodb:
+      host: ${MONGO_HOST:localhost}
+      port: ${MONGO_PORT:27017}
+      database: ${MONGO_DB:test}
+server:
+  port: ${SERVER_PORT:8081}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_HOST:localhost}:8761/eureka/
