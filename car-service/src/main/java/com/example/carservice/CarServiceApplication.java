@@ -41,7 +41,8 @@ public class CarServiceApplication {
         Car ID_CROZZ = new Car(UUID.randomUUID(), "ID. CROZZ", LocalDate.of(2021, Month.MAY, 1));
         Car ID_VIZZION = new Car(UUID.randomUUID(), "ID. VIZZION", LocalDate.of(2021, Month.DECEMBER, 1));
         Car ID_BUZZ = new Car(UUID.randomUUID(), "ID. BUZZ", LocalDate.of(2021, Month.DECEMBER, 1));
-        Set<Car> vwConcepts = Set.of(ID, ID_BUZZ, ID_CROZZ, ID_VIZZION);
+        Car ID_FUZZ = new Car(UUID.randomUUID(), "ID. FUZZ", LocalDate.of(2021, Month.JANUARY, 1));
+        Set<Car> vwConcepts = Set.of(ID, ID_BUZZ, ID_CROZZ, ID_VIZZION, ID_FUZZ);
 
         return args -> {
             repository.deleteAll().thenMany(Flux.just(vwConcepts).flatMap(repository::saveAll))
