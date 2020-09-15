@@ -1,9 +1,9 @@
 FROM maven:3.6.3-jdk-11 as builder
 WORKDIR /app
 COPY ./pom.xml ./
-RUN mvn compile
+RUN mvn compile --no-transfer-progress
 COPY . .
-RUN mvn package
+RUN mvn package --no-transfer-progress
 
 FROM openjdk:12-alpine
 VOLUME /tmp
