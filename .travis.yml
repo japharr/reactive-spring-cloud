@@ -12,7 +12,7 @@ after_success:
   - docker build -t japharr/multi-car-service ./car-service
   - docker build -t japharr/multi-driver-service ./driver-service
   - docker build -t japharr/multi-discovery-service ./discovery-service
-  - docker build -t japharr/multi-api-gateway ./discovery-service
+  - docker build -t japharr/multi-api-gateway ./api-gateway
   # login to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # take the image and push to docker hub
