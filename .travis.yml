@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t japharr/car-service-test -f ./car-service/Dockerfile.dev ./car-service
+
+script:
+  - docker run japharr/car-service-test mvn test
+
+after_success:
+  - docker build -t japharr/multi-car-service ./car-service
+  - docker build -t japharr/multi-driver-service ./driver-service
+  - docker build -t japharr/multi-discovery-service ./discovery-service
+  - docker build -t japharr/multi-api-gateway ./discovery-service
+  # login to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # take the image and push to docker hub
+  - docker push japharr/multi-car-service
+  - docker push japharr/multi-driver-service
+  - docker push japharr/multi-discovery-service
+  - docker push japharr/multi-api-gateway
